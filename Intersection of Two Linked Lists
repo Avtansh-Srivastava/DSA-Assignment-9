@@ -1,0 +1,29 @@
+
+class Solution {
+public:
+    ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) {
+        ListNode* itrA = headA;
+        int countA = 1;
+        int countB = 1;
+        ListNode* itrB = headB;
+        while(itrA->next != NULL){
+            countA++;
+            itrA = itrA->next;
+        }while(itrB->next != NULL){
+            countB++;
+            itrB = itrB->next;
+        }
+        if(itrA!=itrB)return NULL;
+        itrA = headA;
+        itrB = headB;
+
+        if(countA>countB){
+            for(int i = 0; i < countA-countB; i++)itrA = itrA->next;
+        }else{
+            for(int i = 0; i < countB-countA; i++)itrB = itrB->next;
+        }
+        while(itrA!=itrB){
+            itrA=itrA->next;
+            itrB=itrB->next;
+        }
+        return itrA;
